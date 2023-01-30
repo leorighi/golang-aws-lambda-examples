@@ -3,12 +3,11 @@ This repository contains several Golang-based Lambda examples that interact with
 
 ## Requirements
 Before you can run the examples, you need to have the following software installed on your computer:
-* Go programming language
-* Golang SDK v2 (can be installed using `go get github.com/aws/aws-sdk-go/aws`)
+* Go programming language 1.19
 
 ## Getting started
-1. Clone the repository to your computer: git clone https://github.com/[YOUR_USERNAME]/golang-aws-lambda-examples.git
-2. Navigate to the example you want to run: cd golang-aws-lambda-examples/[EXAMPLE_NAME]
+1. Clone the repository to your computer: git clone https://github.com/leorighi/golang-aws-lambda-examples.git
+2. Navigate to the example you want to run: cd golang-aws-lambda-examples/leorighi
 3. Build the example: go build
 4. Deploy and run.
 ## Examples
