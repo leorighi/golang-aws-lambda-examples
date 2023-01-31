@@ -1,8 +1,8 @@
-package main
+package s3
 
 import (
 	"context"
-	"os"
+	"fmt"
 
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,20 +12,16 @@ import (
 
 func handler() {
 	svc, _ := S3Connection()
-	file, err := os.Open("/path/to/file.txt")
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
-
-	_, err = svc.PutObject(&s3.PutObjectInput{
-		Bucket: aws.String("myBucket"),
-		Key:    aws.String("file.txt"),
-		Body:   file,
+	_, err := svc.CopyObject(&s3.CopyObjectInput{
+		Bucket:     aws.String("my-bucket"),
+		CopySource: aws.String("mybucket/file.txt"),
+		Key:        aws.String("copyFile.txt"),
 	})
 	if err != nil {
 		panic(err)
 	}
+
+	fmt.Println("Object copied.")
 }
 
 func main() {
@@ -35,7 +31,7 @@ func main() {
 func S3Connection() (*s3.Client, error) {
 	cfg, err := config.LoadDefaultConfig(context.TODO())
 	if err != nil {
-		panic(err)
+		return &s3.Client{}, err
 	}
 	svc := s3.NewFromConfig(cfg)
 	return svc, nil
